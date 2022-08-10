@@ -21,6 +21,10 @@ public class MainController {
 
     @GetMapping("/game_register")
     public  String gameRegister(Model model) {
+        if (model.getAttribute("profile") != null) {
+            model.addAttribute("denied", "Permission denied, you are not logged in");
+            return "redirect:/";
+        }
         return "game_register";
     }
 
