@@ -20,13 +20,13 @@ public class MainController {
     }
 
     @GetMapping("/game_register")
-    public  String gameRegister() {
-        return "Duck";
+    public  String gameRegister(Model model) {
+        return "game_register";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "Duck";
+        return "register";
     }
 
     @GetMapping("/login")
