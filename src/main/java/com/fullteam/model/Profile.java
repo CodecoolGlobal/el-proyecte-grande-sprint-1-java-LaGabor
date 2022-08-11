@@ -12,14 +12,16 @@ public class Profile {
     private  String profileDescription;
     private Set<Game> ownedComputerGames;
     private Set<Game> ownedBoardGames;
+    private final int id;
 
 
-    public Profile(String name, LocalDate birthDate, String profileDescription, Set<Game> ownedComputerGames, Set<Game> ownedBoardGames) {
+    public Profile(String name, LocalDate birthDate, String profileDescription, Set<Game> ownedComputerGames, Set<Game> ownedBoardGames,int id) {
         this.name = name;
         this.birthDate = birthDate;
         this.profileDescription = profileDescription;
         this.ownedComputerGames = ownedComputerGames;
         this.ownedBoardGames = ownedBoardGames;
+        this.id = id;
 
     }
 }

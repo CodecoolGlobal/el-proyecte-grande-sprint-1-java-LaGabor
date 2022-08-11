@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class TeamCreator {
 
-    public Team createTeam(String teamName, String teamDescription, short wantedTeamSize, short freePlaces, Game playedGame) {
-        return null;
+    private static int id = 1;
+
+    public Team createTeam(String teamName, String teamDescription, byte wantedTeamSize, byte freePlaces, Game playedGame) {
+        return new Team(teamName,teamDescription,wantedTeamSize,freePlaces,playedGame,id++);
     }
 }

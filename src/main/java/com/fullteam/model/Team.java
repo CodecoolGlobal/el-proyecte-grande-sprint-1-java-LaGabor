@@ -10,13 +10,16 @@ public class Team {
     private byte freePlaces;
     private Game playedGame;
     private final LocalDate teamCreated=LocalDate.now();
+    private final int id;
 
-    public Team(String teamName, String teamDescription, byte wantedTeamSize, byte freePlaces, Game playedGame) {
+    public Team(String teamName, String teamDescription, byte wantedTeamSize, byte freePlaces, Game playedGame,int id) {
         this.teamName = teamName;
         this.teamDescription = teamDescription;
         this.wantedTeamSize = wantedTeamSize;
         this.freePlaces = freePlaces;
         this.playedGame = playedGame;
+        this.id = id;
+
     }
 
 
