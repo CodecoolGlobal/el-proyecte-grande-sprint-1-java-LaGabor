@@ -1,9 +1,14 @@
 package com.fullteam.controller;
 
+import com.fullteam.model.Profile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
 
 @Controller
 public class MainController {
@@ -29,16 +34,18 @@ public class MainController {
 
     @GetMapping("/login")
     public String login() {
-        return "Duck";
+        return "login";
     }
 
-    @PostMapping("/profile")
-    public String profile(@Value("profile_id") String profileId) {
-        return "Duck";
+    //Change it to Post!
+    @GetMapping("/profile")
+    public String profile(/*@RequestParam("profile_id") String profileId,*/ Model model) {
+        model.addAttribute("species", "Duck");
+        return "profile";
     }
 
     @GetMapping("/team_register")
     public String teamRegister() {
-        return "Duck";
+        return "team_register";
     }
 }
