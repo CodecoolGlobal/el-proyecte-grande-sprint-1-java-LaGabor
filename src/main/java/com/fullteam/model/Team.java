@@ -8,7 +8,8 @@ import java.util.List;
 public class Team {
     private final String teamName;
     private String teamDescription;
-    private byte wantedTeamSize;
+    private final byte maxWantedTeamSize;
+    private final byte minWantedTeamSize;
     private byte freePlaces;
     private Game playedGame;
     private final LocalDate teamCreated=LocalDate.now();
@@ -16,10 +17,11 @@ public class Team {
     private final Profile admin;
     private List<Profile> players = new ArrayList<>();
 
-    public Team(String teamName, String teamDescription, byte wantedTeamSize, byte freePlaces, Game playedGame,int id,Profile admin) {
+    public Team(String teamName, String teamDescription, byte maxWantedTeamSize,byte minWantedTeamSize, byte freePlaces, Game playedGame,int id,Profile admin) {
         this.teamName = teamName;
         this.teamDescription = teamDescription;
-        this.wantedTeamSize = wantedTeamSize;
+        this.maxWantedTeamSize = maxWantedTeamSize;
+        this.minWantedTeamSize = minWantedTeamSize;
         this.freePlaces = freePlaces;
         this.playedGame = playedGame;
         this.id = id;

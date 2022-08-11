@@ -10,7 +10,7 @@ public class TeamCreator {
 
     private static int id = 1;
 
-    public Team createTeam(String teamName, String teamDescription, byte wantedTeamSize, byte freePlaces, Game playedGame, Profile admin) {
-        return new Team(teamName,teamDescription,wantedTeamSize,freePlaces,playedGame,id++,admin);
+    public Team createTeam(String teamName, String teamDescription, byte maxWantedTeamSize,byte minWantedTeamSize, byte freePlaces, Game playedGame, Profile admin) {
+        return new Team(teamName,teamDescription,maxWantedTeamSize,minWantedTeamSize,freePlaces,playedGame,id++,admin);
     }
 }
