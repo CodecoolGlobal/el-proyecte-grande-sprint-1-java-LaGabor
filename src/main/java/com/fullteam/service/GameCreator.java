@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GameCreator {
-    public Game creatGame(String title, short minPlayer, short maxPlayer, GameType gameType) {
 
+    private static int id = 1;
 
-        return null;
+    public Game creatGame(String title, byte minPlayer, byte maxPlayer, GameType gameType, String description) {
+
+        return new Game(title,minPlayer,maxPlayer,gameType,description,id++);
+
     }
 }
