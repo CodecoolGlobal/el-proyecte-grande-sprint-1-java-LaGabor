@@ -1,0 +1,11 @@
+GET http://localhost:8080/
+
+## get roleplaygames
+
+GET http://localhost:8080/teams/online_game
+
+
+## read profile
+
+
+GET http://localhost:8080/profile
