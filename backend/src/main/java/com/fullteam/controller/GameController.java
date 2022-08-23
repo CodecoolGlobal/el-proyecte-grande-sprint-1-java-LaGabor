@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 public class GameController {
 
     private GameService gameService;
@@ -34,7 +35,7 @@ public class GameController {
     }
 
     @PostMapping("/game/list/{}")
-    public @ResponseBody Set<Game> gameList(@RequestBody GameTypeDto gameType) {
+    public Set<Game> gameList(@RequestBody GameTypeDto gameType) {
         return gameService.getGamesByType(gameType.getGameType());
     }
 
