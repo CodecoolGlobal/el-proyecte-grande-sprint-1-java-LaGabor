@@ -1,14 +1,9 @@
 package com.fullteam.data_sample;
 
-import com.fullteam.model.Profile;
 import com.fullteam.model.Team;
 import com.fullteam.service.dao.TeamMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 @Component
 public class TeamCreator {
