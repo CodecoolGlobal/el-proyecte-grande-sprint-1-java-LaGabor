@@ -1,4 +1,6 @@
+
 import React from 'react';
+import {useEffect, useRef, useState} from "react";
 import './App.css';
 import Main from './views/Main.js'
 import NotFound from './views/NotFound.js'
@@ -15,6 +17,38 @@ import Register from "./views/Register";
 
 
 function App() {
+    const [Game, setGame] = useState([]);
+    let effectRan = useRef(false);
+
+    const fetchUrl = (url, func, body = {}, method = 'POST') => {
+
+        const requestOption = {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        }
+
+        if (effectRan.current === true){
+            fetch(url, requestOption)
+                .then(response => response.json())
+                .then(res => {
+                    func(res)
+                    console.log(res)
+                })
+                .catch(error => {
+                    console.error('There was an error!', error)
+                });
+
+        }
+        return () => {
+            effectRan.current = true
+        }
+    }
+
+    useEffect(() => {
+        return fetchUrl('http://localhost:8080/game/list/board', setGame, {gameType: 'BOARD'})
+    }, [])
+
   return (
     <Router>
       <Switch>
