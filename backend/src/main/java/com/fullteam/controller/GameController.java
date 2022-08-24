@@ -3,6 +3,7 @@ package com.fullteam.controller;
 import com.fullteam.controller.dto.GameDto;
 import com.fullteam.controller.dto.GameTypeDto;
 import com.fullteam.model.Game;
+import com.fullteam.model.types.GameType;
 import com.fullteam.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +36,13 @@ public class GameController {
     }
 
     @PostMapping("/game/list/{}")
-    public Set<Game> gameList(@RequestBody GameTypeDto gameType) {
-        return gameService.getGamesByType(gameType.getGameType());
+    public Set<Game> gameList(@RequestBody GameType gameType) {
+        return gameService.getGamesByType(gameType);
     }
 
-    @GetMapping("/game/all-games")
-    public String allGame(Model model) {
-        model.addAttribute("games", gameService.getAllGame());
-        return "all_games";
+    @PostMapping("/game/all-games")
+    public @ResponseBody Set<Game> allGame() {
+        return gameService.getAllGame();
     }
 
 }

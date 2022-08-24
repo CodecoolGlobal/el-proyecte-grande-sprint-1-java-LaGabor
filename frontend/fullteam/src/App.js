@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {useEffect, useRef, useState} from "react";
 import './App.css';
@@ -22,13 +21,14 @@ function App() {
 
     const fetchUrl = (url, func, body = {}, method = 'POST') => {
 
-        const requestOption = {
+            const requestOption = {
             method: method,
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
-        }
+            body: JSON.stringify(body)}
 
-        if (effectRan.current === true){
+
+        console.log('In Fetch: ', requestOption.body)
+        if (effectRan.current === true) {
             fetch(url, requestOption)
                 .then(response => response.json())
                 .then(res => {
@@ -40,54 +40,52 @@ function App() {
                 });
 
         }
-        return () => {
             effectRan.current = true
-        }
     }
 
-    useEffect(() => {
-        return fetchUrl('http://localhost:8080/game/list/board', setGame, {gameType: 'BOARD'})
-    }, [])
 
-  return (
-    <Router>
-      <Switch>
-          <Route exact path="/">
-              <Main/>
-          </Route>
-          <Route exact path="/games">
-              <Games/>
-          </Route>
-          <Route exact path="/game/register">
-              <GameRegister/>
-          </Route>
-          <Route path="/game/:id">
-              <Game/>
-          </Route>
-          <Route exact path="/login">
-              <Login/>
-          </Route>
-          <Route  path="/profile/:id">
-              <Profile/>
-          </Route>
-          <Route exact path="/team/register">
-              <TeamRegister/>
-          </Route>
-          <Route exact path="/teams">
-              <Teams/>
-          </Route>
-          <Route  path="/team/:id">
-              <Team/>
-          </Route>
-          <Route exact path="/register">
-              <Register/>
-          </Route>
-          <Route  path="*">
-              <NotFound/>
-          </Route>
-      </Switch>
-    </Router>
-  );
+
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/">
+                    <div>
+                        <Main/>
+                    </div>
+                </Route>
+                <Route exact path="/games">
+                    <Games fetch={fetchUrl}/>
+                </Route>
+                <Route exact path="/game/register">
+                    <GameRegister/>
+                </Route>
+                <Route path="/game/:id">
+                    <Game/>
+                </Route>
+                <Route exact path="/login">
+                    <Login/>
+                </Route>
+                <Route path="/profile/:id">
+                    <Profile/>
+                </Route>
+                <Route exact path="/team/register">
+                    <TeamRegister/>
+                </Route>
+                <Route exact path="/teams">
+                    <Teams/>
+                </Route>
+                <Route path="/team/:id">
+                    <Team/>
+                </Route>
+                <Route exact path="/register">
+                    <Register/>
+                </Route>
+                <Route path="*">
+                    <NotFound/>
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;

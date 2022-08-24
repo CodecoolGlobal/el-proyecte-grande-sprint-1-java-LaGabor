@@ -1,8 +1,10 @@
-import React from 'react';
-const Games = () => {
+import React, {useState} from 'react';
+import List from '../components/List.js'
+const Games = ({fetch}) => {
+
     return(
         <div className="gameRegister-container">
-            <h2>Iam the Game List!</h2>
+            <List fetch={fetch}/>
         </div>
     );
 }
