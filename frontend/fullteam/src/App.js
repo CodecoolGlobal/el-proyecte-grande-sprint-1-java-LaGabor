@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './components/Style.css'
 import Main from './views/Main.js'
 import NotFound from './views/NotFound.js'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -12,11 +13,15 @@ import TeamRegister from "./views/TeamRegister";
 import Teams from "./views/Teams";
 import Team from "./views/Team";
 import Register from "./views/Register";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+
 
 
 function App() {
   return (
     <Router>
+        <Header/>
       <Switch>
           <Route exact path="/">
               <Main/>
@@ -39,7 +44,7 @@ function App() {
           <Route exact path="/team/register">
               <TeamRegister/>
           </Route>
-          <Route exact path="/teams">
+          <Route exact path="/teams/:gameType">
               <Teams/>
           </Route>
           <Route  path="/team/:id">
@@ -52,6 +57,7 @@ function App() {
               <NotFound/>
           </Route>
       </Switch>
+        <Footer/>
     </Router>
   );
 }
