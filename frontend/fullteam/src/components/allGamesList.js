@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
-import fetchUrl from "../fetch/fetch"
+import fetchUrl from "../fetch/fetch";
+import {Link} from "react-router-dom";
 
-const GameList = () => {
+const AllGamesList = () => {
     const [Games, setGames] = useState([]);
 
     useEffect(() => {
@@ -11,10 +12,9 @@ const GameList = () => {
     const getTableRows = (type) => {
         return Games.filter(g => g.type === type).map(game =>
             <tr>
-                <td>{game.title}</td>
-                <td>{game.minPlayer}</td>
-                <td>{game.maxPlayer}</td>
-                <td>{game.description}</td>
+                <td><Link to={'/game/' + game.id}>{game.title}</Link></td>
+                <td>{game.minPlayer} - {game.maxPlayer}</td>
+                <td></td>
             </tr>
         )
     }
@@ -23,9 +23,7 @@ const GameList = () => {
             <table className="gameTable">
                 <tr>
                     <th>Title</th>
-                    <th>Min</th>
-                    <th>Max</th>
-                    <th>Description</th>
+                    <th>Players</th>
                 </tr>
                 <p className='gameTableTypeName'>Online Games</p>
                 {getTableRows('ONLINE')}
@@ -38,6 +36,6 @@ const GameList = () => {
 
     )
 }
-export default GameList;
+export default AllGamesList;
 
 

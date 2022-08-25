@@ -50,4 +50,8 @@ public class GameService {
     public Set<Game> getAllGame() {
         return gameDao.getGames();
     }
+
+    public Game getGameById(int id) {
+        return gameDao.getGameById(id);
+    }
 }
