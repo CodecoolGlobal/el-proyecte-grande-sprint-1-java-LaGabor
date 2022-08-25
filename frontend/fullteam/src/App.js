@@ -17,42 +17,16 @@ import Register from "./views/Register";
 
 function App() {
     const [Game, setGame] = useState([]);
-    let effectRan = useRef(false);
-
-    const fetchUrl = (url, func, body = {}, method = 'POST') => {
-
-            const requestOption = {
-            method: method,
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)}
-
-
-        console.log('In Fetch: ', requestOption.body)
-        if (effectRan.current === true) {
-            fetch(url, requestOption)
-                .then(response => response.json())
-                .then(res => {
-                    func(res)
-                    console.log(res)
-                })
-                .catch(error => {
-                    console.error('There was an error!', error)
-                });
-
-        }
-            effectRan.current = true
-    }
-
-
+    useRef(false);
 
     return (
         <Router>
             <Switch>
                 <Route exact path="/">
-                        <Main/>
+                    <Main/>
                 </Route>
                 <Route exact path="/games">
-                    <Games fetch={fetchUrl}/>
+                    <Games/>
                 </Route>
                 <Route exact path="/game/register">
                     <GameRegister/>
