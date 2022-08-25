@@ -49,9 +49,7 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <div>
                         <Main/>
-                    </div>
                 </Route>
                 <Route exact path="/games">
                     <Games fetch={fetchUrl}/>
