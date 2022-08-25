@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 const GameList = ({fetch}) => {
     const [Games, setGames] = useState([]);
 
+
     useEffect(() => {
         fetch('http://localhost:8080/game/all-games', setGames);
     }, [])

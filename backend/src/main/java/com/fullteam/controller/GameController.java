@@ -36,7 +36,8 @@ public class GameController {
     }
 
     @PostMapping("/game/list/{}")
-    public Set<Game> gameList(@RequestBody GameType gameType) {
+    public Set<Game> gameList(@RequestBody GameType gameType
+    ) {
         return gameService.getGamesByType(gameType);
     }
 
