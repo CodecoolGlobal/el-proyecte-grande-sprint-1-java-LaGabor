@@ -32,5 +32,10 @@ public class GameMemory implements GameDao {
     public Set<Game> getGames() {
         return storage;
     }
+
+    @Override
+    public Game getGameById(int id) {
+        return storage.stream().filter(game -> game.getId() == id).findFirst().orElse(null);
+    }
 }
 

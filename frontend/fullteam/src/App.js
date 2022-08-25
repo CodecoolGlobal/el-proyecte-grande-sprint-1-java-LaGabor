@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import './App.css';
 import Main from './views/Main.js'
 import NotFound from './views/NotFound.js'
@@ -16,7 +16,6 @@ import Register from "./views/Register";
 
 
 function App() {
-    const [Game, setGame] = useState([]);
     useRef(false);
 
     return (

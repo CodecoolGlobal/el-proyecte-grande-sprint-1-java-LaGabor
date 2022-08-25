@@ -12,4 +12,6 @@ public interface GameDao {
     List<Integer> gameIds();
 
     Set<Game> getGames();
+
+    Game getGameById(int id);
 }
