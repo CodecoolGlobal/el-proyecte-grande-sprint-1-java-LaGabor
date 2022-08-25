@@ -1,4 +1,5 @@
 import React from 'react';
+import {useRef} from "react";
 import './App.css';
 import './components/Style.css'
 import Main from './views/Main.js'
@@ -19,6 +20,7 @@ import Header from "./components/Header";
 
 
 function App() {
+    useRef(false);
   return (
     <Router>
         <Header/>

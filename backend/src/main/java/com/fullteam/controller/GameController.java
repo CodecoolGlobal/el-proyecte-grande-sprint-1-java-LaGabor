@@ -3,6 +3,7 @@ package com.fullteam.controller;
 import com.fullteam.controller.dto.GameDto;
 import com.fullteam.controller.dto.GameTypeDto;
 import com.fullteam.model.Game;
+import com.fullteam.model.types.GameType;
 import com.fullteam.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 public class GameController {
 
     private GameService gameService;
@@ -33,15 +35,19 @@ public class GameController {
         return "gameRegister";
     }
 
-    @PostMapping("/game/list/{}")
-    public @ResponseBody Set<Game> gameList(@RequestBody GameTypeDto gameType) {
-        return gameService.getGamesByType(gameType.getGameType());
+    @GetMapping("/game/list/{gameType}")
+    public @ResponseBody Set<Game> gameList(@PathVariable GameType gameType) {
+        return gameService.getGamesByType(gameType);
     }
 
     @GetMapping("/game/all-games")
-    public String allGame(Model model) {
-        model.addAttribute("games", gameService.getAllGame());
-        return "all_games";
+    public @ResponseBody Set<Game> allGame() {
+        return gameService.getAllGame();
+    }
+
+    @GetMapping("/game/{id}")
+    public @ResponseBody Game gameById(@PathVariable int id) {
+        return gameService.getGameById(id);
     }
 
 }
