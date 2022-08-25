@@ -35,13 +35,12 @@ public class GameController {
         return "gameRegister";
     }
 
-    @PostMapping("/game/list/{}")
-    public Set<Game> gameList(@RequestBody GameType gameType
-    ) {
+    @GetMapping("/game/list/{gameType}")
+    public @ResponseBody Set<Game> gameList(@PathVariable GameType gameType) {
         return gameService.getGamesByType(gameType);
     }
 
-    @PostMapping("/game/all-games")
+    @GetMapping("/game/all-games")
     public @ResponseBody Set<Game> allGame() {
         return gameService.getAllGame();
     }

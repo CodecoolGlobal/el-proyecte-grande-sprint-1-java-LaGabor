@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
+import fetchUrl from "../fetch/fetch"
 
-const GameList = ({fetch}) => {
+const GameList = () => {
     const [Games, setGames] = useState([]);
 
-
     useEffect(() => {
-        fetch('http://localhost:8080/game/all-games', setGames);
+        fetchUrl('http://localhost:8080/game/all-games', setGames);
     }, [])
 
     const getTableRows = (type) => {

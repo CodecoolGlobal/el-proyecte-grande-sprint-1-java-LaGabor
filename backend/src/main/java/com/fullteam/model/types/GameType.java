@@ -2,6 +2,8 @@ package com.fullteam.model.types;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import java.util.Locale;
+
 public enum GameType {
     BOARD,
     ONLINE,
@@ -14,6 +16,6 @@ public enum GameType {
 
     @JsonCreator
     public static GameType SaveType(String value){
-        return GameType.valueOf(value);
+        return GameType.valueOf(value.toUpperCase(Locale.ROOT));
     }
 }
