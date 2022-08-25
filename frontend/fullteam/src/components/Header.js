@@ -17,7 +17,7 @@ const Header = () => {
                     <Link to="/" style={{ textDecoration: 'none' }}> <NavItems title="HOME" Icon={HomeIcon} /></Link>
                     <NavItems title="SEARCH" Icon={SearchIcon} />
                     <NavItems title="TRENDING" Icon={LightningBoltIcon} />
-                    <NavItems title="COLLECTIONS" Icon={CollectionIcon} />
+                    <Link to="games" style={{ textDecoration: 'none' }}><NavItems title="GAMES" Icon={CollectionIcon} /></Link>
                     <Link to="Login" style={{ textDecoration: 'none' }}><NavItems title="LOGIN" Icon={UserIcon} /></Link>
                 </div>
             </nav>
