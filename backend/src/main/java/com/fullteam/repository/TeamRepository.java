@@ -1,9 +1,9 @@
 package com.fullteam.repository;
 
-import com.fullteam.model.Game;
+import com.fullteam.model.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface TeamRepository extends JpaRepository<Team, Long> {
 }
