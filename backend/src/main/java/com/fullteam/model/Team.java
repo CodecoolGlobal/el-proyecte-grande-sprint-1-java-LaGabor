@@ -1,47 +1,54 @@
 package com.fullteam.model;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Entity
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Team {
+
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(updatable = false)
+    private Long id;
+
     @Builder.Default
     private String teamName = "Annonymous";
+
     @Builder.Default
     private String teamDescription = "No description added yet.";
-    private final byte maxWantedTeamSize;
-    private final byte minWantedTeamSize;
+
+    @Column(updatable = false)
+    private byte maxWantedTeamSize;
+
+    @Column(updatable = false)
+    private byte minWantedTeamSize;
+
     private byte freePlaces;
+
     @Builder.Default
+    @ManyToOne
     private Game game = null;
-    private final int id;
-    @Builder.Default
-    private Profile admin = null;
+
+    @ManyToOne
+    private Profile admin;
+
     private final LocalDate teamCreated = LocalDate.now();
+
     @Builder.Default
+    @OneToMany
     private List<Profile> players = new ArrayList<>();
 
-    public Team(String teamName, String teamDescription, byte maxWantedTeamSize, byte minWantedTeamSize, byte freePlaces, Game game, int id, Profile admin, List<Profile> players) {
-            this.teamName = teamName;
-            this.teamDescription = teamDescription;
-            this.maxWantedTeamSize = maxWantedTeamSize;
-            this.minWantedTeamSize = minWantedTeamSize;
-            this.freePlaces = freePlaces;
-            this.game = game;
-            this.id = id;
-            this.admin = admin;
-            this.players = players;
-            players.add(admin);
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public void setAdmin(Profile admin) {
         if (this.admin == null) {
