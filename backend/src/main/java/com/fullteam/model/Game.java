@@ -1,38 +1,43 @@
 package com.fullteam.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fullteam.model.types.GameType;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
+import javax.persistence.*;
 
 
-@Data
+@Entity
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Game {
-    private final String title;
+
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(updatable = false)
+    private Long id;
+
+    @NonNull
+    @Column(updatable = false)
+    private String title;
+
     @Builder.Default
+    @Column(updatable = false)
     private byte minPlayer = 2;
-    @Builder.Default
-    private byte maxPlayer = 4;
-    private final GameType type;
+
+    @Column(updatable = false)
+    private byte maxPlayer;
+
+    @NonNull
+    @Column(updatable = false)
+    private GameType type;
+
     @Builder.Default
     private String description = "No description added yet.";
-    private final int id;
 
-    public Game(String title, byte minPlayer, byte maxPlayer, GameType gameType,String description,int id) {
-        this.title = title;
-        this.minPlayer = minPlayer;
-        this.maxPlayer = maxPlayer;
-        this.type = gameType;
-        this.description = description;
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public GameType getType() {
-        return type;
-    }
 }

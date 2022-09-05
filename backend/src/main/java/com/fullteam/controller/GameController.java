@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -41,12 +43,12 @@ public class GameController {
     }
 
     @GetMapping("/game/all-games")
-    public @ResponseBody Set<Game> allGame() {
+    public @ResponseBody List<Game> allGame() {
         return gameService.getAllGame();
     }
 
     @GetMapping("/game/{id}")
-    public @ResponseBody Game gameById(@PathVariable int id) {
+    public @ResponseBody Optional<Game> gameById(@PathVariable Long id) {
         return gameService.getGameById(id);
     }
 
