@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fullteam.model.types.GameType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -22,18 +19,22 @@ public class Game {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @Column(updatable = false)
+    private Long id;
 
     @NonNull
+    @Column(updatable = false)
     private String title;
 
     @Builder.Default
+    @Column(updatable = false)
     private byte minPlayer = 2;
 
-    @Builder.Default
-    private byte maxPlayer = 4;
+    @Column(updatable = false)
+    private byte maxPlayer;
 
     @NonNull
+    @Column(updatable = false)
     private GameType type;
 
     @Builder.Default
