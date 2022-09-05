@@ -1,7 +1,7 @@
 package com.fullteam.service;
 
 import com.fullteam.model.Team;
-import com.fullteam.service.dao.TeamDao;
+import com.fullteam.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,26 +9,20 @@ import java.util.List;
 
 @Service
 public class TeamService {
-    TeamDao teamDao;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public TeamService(TeamDao teamDao) {
-        this.teamDao = teamDao;
+    public TeamService(TeamRepository teamRepository) {
+
+        this.teamRepository = teamRepository;
     }
 
     public void addTeam(Team team) {
-        teamDao.addTeam(team);
+        teamRepository.save(team);
     }
 
-    private Integer getFirstFreeId() {
-        Integer id = 0;
-        while (teamDao.teamIds().contains(id)) {
-            id++;
-        }
-        return id;
-    }
 
     public List<Team> getTeams() {
-        return teamDao.getTeams();
+        return teamRepository.findAll();
     }
 }
