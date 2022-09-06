@@ -38,6 +38,6 @@ public class Profile {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false)
-    private  int id;
+    private  Long id;
 
 }
