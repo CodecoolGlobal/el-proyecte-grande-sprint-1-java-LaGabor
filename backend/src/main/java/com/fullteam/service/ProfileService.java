@@ -2,7 +2,6 @@ package com.fullteam.service;
 
 import com.fullteam.model.Profile;
 import com.fullteam.repository.ProfileRepository;
-import com.fullteam.service.dao.ProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
