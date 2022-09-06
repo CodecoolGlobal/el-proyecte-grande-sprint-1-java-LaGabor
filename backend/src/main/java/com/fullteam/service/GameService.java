@@ -4,7 +4,6 @@ package com.fullteam.service;
 import com.fullteam.model.Game;
 import com.fullteam.model.types.GameType;
 import com.fullteam.repository.GameRepository;
-import com.fullteam.service.dao.GameDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
