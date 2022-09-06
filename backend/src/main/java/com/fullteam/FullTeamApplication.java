@@ -1,6 +1,7 @@
 package com.fullteam;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import com.fullteam.service.GameService;
@@ -39,12 +40,12 @@ public class FullTeamApplication implements CommandLineRunner {
 
         Set<Game> boardGames = gameService.getGamesByType(GameType.BOARD);
         Set<Game> onlineGames = gameService.getGamesByType(GameType.ONLINE);
-        Profile profile = profileService.getProfile(0);
-        boardGames.forEach(profile::addToBoardGameList);
-        onlineGames.forEach(profile::addToOnlineGameList);
+        Optional<Profile> profile = profileService.getProfile(0L);
+        //boardGames.forEach(profile::addToBoardGameList);
+        //onlineGames.forEach(profile::addToOnlineGameList);
         List<Team> teams = teamService.getTeams();
-        teams.get(0).setAdmin(profile);
-        teams.get(1).setAdmin(profile);
+        teams.get(0).setAdmin(profile.get());
+        teams.get(1).setAdmin(profile.get());
         teams.get(0).setGame(getRandomElementFromSet(boardGames));
         teams.get(1).setGame(getRandomElementFromSet(onlineGames));
     }

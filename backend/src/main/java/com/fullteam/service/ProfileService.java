@@ -1,33 +1,32 @@
 package com.fullteam.service;
 
 import com.fullteam.model.Profile;
+import com.fullteam.repository.ProfileRepository;
 import com.fullteam.service.dao.ProfileDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProfileService {
-    ProfileDao profileDao;
+    private final ProfileRepository profileRepository;
+
+
+
 
     @Autowired
-    public ProfileService(ProfileDao profileDao) {
-        this.profileDao = profileDao;
+    public ProfileService(ProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
+
     }
 
     public void addProfile(Profile profile) {
-        profileDao.addProfile(profile);
+        profileRepository.save(profile);
     }
 
-    public Integer getFirstFreeId() {
-        Integer id = 0;
-        while (profileDao.profileIds().contains(id)) {
-            id++;
-        }
-        return id;
-    }
-
-    public Profile getProfile(int id) {
-        return profileDao.getProfile(id);
+    public Optional<Profile> getProfile(Long id) {
+        return profileRepository.findById(id);
     }
 
 }
