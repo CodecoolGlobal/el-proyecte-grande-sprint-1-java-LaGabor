@@ -1,7 +1,7 @@
 package com.fullteam.data_sample;
 
 import com.fullteam.model.Profile;
-import com.fullteam.service.dao.ProfileMemory;
+import com.fullteam.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
@@ -9,18 +9,18 @@ import java.time.LocalDate;
 @Component
 public class ProfileCreator {
 
-    ProfileMemory profileMemory;
+    private final ProfileService profileService;
+
+
 
     @Autowired
-    public ProfileCreator(ProfileMemory profileMemory) {
-        this.profileMemory = profileMemory;
-        initialize();
+    public ProfileCreator(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
     private void initialize() {
-        profileMemory.addProfile(
+        profileService.addProfile(
                 Profile.builder()
-                        .id(0)
                         .name("Ducktor Quackery Quack")
                         .birthDate(LocalDate.of(2018,1,13))
                         .description("I like bread and fish quack.")
