@@ -46,7 +46,7 @@ public class Team {
     private final LocalDate teamCreated = LocalDate.now();
 
     @Builder.Default
-    @OneToMany
+    @ManyToMany
     private List<Profile> players = new ArrayList<>();
 
 

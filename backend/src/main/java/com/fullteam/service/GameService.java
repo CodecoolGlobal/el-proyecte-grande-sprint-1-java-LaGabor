@@ -25,6 +25,12 @@ public class GameService {
         gameRepository.save(game);
     }
 
+    public void addAllGame(List<Game> games){
+        for(Game game: games){
+            gameRepository.save(game);
+        }
+    }
+
     public Set<Game> getGamesByType(GameType type) {
         return gameRepository.findAll().stream().filter(game -> game.getType().equals(type)).collect(Collectors.toSet());
     }
