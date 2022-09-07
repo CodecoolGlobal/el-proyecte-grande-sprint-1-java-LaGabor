@@ -36,18 +36,7 @@ public class FullTeamApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // TODO Auto-generated method stub
 
-        Set<Game> boardGames = gameService.getGamesByType(GameType.BOARD);
-        Set<Game> onlineGames = gameService.getGamesByType(GameType.ONLINE);
-        Optional<Profile> profile = profileService.getProfile(0L);
-        //boardGames.forEach(profile::addToBoardGameList);
-        //onlineGames.forEach(profile::addToOnlineGameList);
-        List<Team> teams = teamService.getTeams();
-        teams.get(0).setAdmin(profile.get());
-        teams.get(1).setAdmin(profile.get());
-        teams.get(0).setGame(getRandomElementFromSet(boardGames));
-        teams.get(1).setGame(getRandomElementFromSet(onlineGames));
     }
 
     private Game getRandomElementFromSet(Set<Game> set) {

@@ -5,6 +5,7 @@ import com.fullteam.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,10 @@ public class ProfileService {
 
     public Optional<Profile> getProfile(Long id) {
         return profileRepository.findById(id);
+    }
+
+    public List<Profile> getProfiles(){
+        return profileRepository.findAll();
     }
 
 }
