@@ -53,4 +53,8 @@ public class GameService {
     public Optional<Game> getGameById(Long id) {
         return gameRepository.findById(id);
     }
+
+    public Optional<Game> getGameByName(String name) {
+        return gameRepository.findByName(name);
+    }
 }
