@@ -57,4 +57,8 @@ public class GameService {
     public Optional<Game> getGameByTitle(String title) {
         return gameRepository.findByTitle(title);
     }
+
+    public Optional<Game> findByTitleAndType(String title, GameType gameType) {
+        return gameRepository.findByTitleAndType(title, gameType);
+    }
 }
