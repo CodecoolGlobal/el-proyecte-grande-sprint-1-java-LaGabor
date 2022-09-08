@@ -54,7 +54,7 @@ public class GameService {
         return gameRepository.findById(id);
     }
 
-    public Optional<Game> getGameByName(String name) {
-        return gameRepository.findByName(name);
+    public Optional<Game> getGameByTitle(String title) {
+        return gameRepository.findByTitle(title);
     }
 }

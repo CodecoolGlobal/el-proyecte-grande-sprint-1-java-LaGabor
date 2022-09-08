@@ -47,9 +47,9 @@ public class GameController {
         return gameService.getAllGame();
     }
 
-    @GetMapping("/game/{name}")
-    public @ResponseBody Optional<Game> gameById(@PathVariable String name) {
-        return gameService.getGameByName(name);
+    @GetMapping("/game/{title}")
+    public @ResponseBody Optional<Game> gameById(@PathVariable String title) {
+        return gameService.getGameByTitle(title);
     }
 
 }
