@@ -6,6 +6,7 @@ import com.fullteam.model.types.GameType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity
@@ -36,6 +37,12 @@ public class Game {
     @NonNull
     @Column(updatable = false)
     private GameType type;
+
+    private String country;
+
+    private String publisher;
+
+    private LocalDate creationDate;
 
     @Builder.Default
     private String description = "No description added yet.";
