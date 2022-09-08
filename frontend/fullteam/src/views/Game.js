@@ -10,12 +10,10 @@ const Game = () => {
     const url = 'http://localhost:8080/game/' + type.toUpperCase() + '/'+ title;
     console.log('In Game', url)
 
-    useEffect(() => {
-        console.log('In Game useEffect')
-      fetchUrl(url, setGame);
+    useEffect( () => {
+         fetchUrl(url).then(data => setGame(data));
     }, [url])
 
-    console.log('In Game', game)
 
     return (
         <div className="game-container">

@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 const AllGamesList = () => {
     const [Games, setGames] = useState([]);
 
-    useEffect(() => {
-        fetchUrl('http://localhost:8080/game/all-games', setGames);
+    useEffect(   () => {
+        fetchUrl("http://localhost:8080/game/all-games").then(data => setGames(data));
     }, [])
 
     const getTableRows = (type) => {
