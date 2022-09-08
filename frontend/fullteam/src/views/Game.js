@@ -12,7 +12,7 @@ const Game = () => {
 
     useEffect( () => {
          fetchUrl(url).then(data => setGame(data));
-    }, [url])
+    }, [])
 
 
     return (

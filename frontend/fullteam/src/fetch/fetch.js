@@ -1,5 +1,4 @@
 import axios from "../fetch/axiosinstance";
-import {useRef} from "react";
 
 const fetchUrl = async (url) => {
     try {
@@ -7,7 +6,7 @@ const fetchUrl = async (url) => {
         console.log("In fetch: ",url)
         return response.data
     } catch (error) {
-        console.log(error.message)
+        console.log("In fetch: ",error.message)
     }
 }
 
