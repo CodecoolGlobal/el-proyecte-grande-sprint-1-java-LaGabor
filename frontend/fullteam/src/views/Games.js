@@ -1,11 +1,12 @@
 import React from 'react';
-import AllGamesList from '../components/allGamesList.js'
+import OldAllGamesList from '../components/OldAllGamesList.js'
 import PageTitle from "../components/PageTitle";
+import AllGamesList from "../components/AllGamesList";
+import '../components/Lister.css';
 const Games = () => {
 
     return(
         <div className="gameRegister-container">
-            <PageTitle title='All Games Yet We Have.'/>
             <AllGamesList/>
         </div>
     );

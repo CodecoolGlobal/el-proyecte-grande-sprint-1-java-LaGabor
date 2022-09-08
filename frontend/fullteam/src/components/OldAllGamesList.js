@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import fetchUrl from "../fetch/fetch";
 import {Link} from "react-router-dom";
 
-const AllGamesList = () => {
+const OldAllGamesList = () => {
     const [Games, setGames] = useState([]);
 
     useEffect(() => {
@@ -36,6 +36,6 @@ const AllGamesList = () => {
 
     )
 }
-export default AllGamesList;
+export default OldAllGamesList;
 
 
