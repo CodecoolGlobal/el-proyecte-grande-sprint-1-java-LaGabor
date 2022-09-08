@@ -85,6 +85,7 @@ public class GameCreator {
                             .type(GameType.ONLINE)
                             .creationDate(LocalDate.of(2017,12,20))
                             .publisher("FromSoftDuck")
+                            .country("Ducktch")
                             .build();
             Game game7 =
                     Game.builder()

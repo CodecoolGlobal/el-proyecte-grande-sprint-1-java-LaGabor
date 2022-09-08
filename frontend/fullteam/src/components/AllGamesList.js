@@ -7,8 +7,9 @@ const AllGamesList = () => {
     const [Games, setGames] = useState([]);
 
 
+
     useEffect(() => {
-        fetchUrl('http://localhost:8080/game/all-games', setGames);
+        fetchUrl("http://localhost:8080/game/all-games").then(response => setGames(response))
     }, [])
 
     const gameTypeBackground = gameType =>{
