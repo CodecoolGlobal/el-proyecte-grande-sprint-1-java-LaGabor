@@ -5,9 +5,10 @@ import fetchUrl from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 
 const Game = () => {
-    const {id} = useParams();
+    const {type,title} = useParams();
     const [game, setGame] = useState([])
-    const url = 'http://localhost:8080/game/' + id;
+    const url = 'http://localhost:8080/game/' + type.toUpperCase() + '/'+ title;
+    console.log('In Game', url)
 
     useEffect( () => {
          fetchUrl(url).then(data => setGame(data));

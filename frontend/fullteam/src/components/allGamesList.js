@@ -10,9 +10,10 @@ const AllGamesList = () => {
     }, [])
 
     const getTableRows = (type) => {
+        console.log(Games)
         return Games.filter(g => g.type === type).map(game =>
             <tr>
-                <td><Link to={'/game/' + game.id}>{game.title}</Link></td>
+                <td><Link to={'/game/'+game.type.toLowerCase()+'/' + game.title}>{game.title}</Link></td>
                 <td>{game.minPlayer} - {game.maxPlayer}</td>
                 <td></td>
             </tr>
