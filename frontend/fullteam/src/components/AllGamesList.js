@@ -9,7 +9,7 @@ const AllGamesList = () => {
 
 
     useEffect(() => {
-        fetchUrl("http://localhost:8080/game/all-games").then(response => setGames(response))
+        fetchUrl("http://localhost:8080/games").then(response => setGames(response))
     }, [])
 
     const gameTypeBackground = gameType =>{
@@ -64,7 +64,7 @@ const AllGamesList = () => {
         )
     }
 
-    return (
+    return Games &&(
         <div className="list-container">
             <div className="list-content .flex-column">
                 {getGameList()}

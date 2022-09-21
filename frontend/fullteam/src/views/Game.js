@@ -15,7 +15,7 @@ const Game = () => {
     }, [])
 
 
-    return (
+    return game && (
         <div className="game-container">
             <PageTitle title={game.title}/>
             <GameDescription game={game}/>
