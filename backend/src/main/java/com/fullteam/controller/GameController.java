@@ -40,7 +40,7 @@ public class GameController {
         return gameService.getGamesByType(gameType);
     }
 
-    @GetMapping("/game/all-games")
+    @GetMapping("/games")
     public @ResponseBody List<Game> allGame() {
         return gameService.getAllGame();
     }
