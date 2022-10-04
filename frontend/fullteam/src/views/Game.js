@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import fetchUrl from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
+import {useEffectOnce} from "../hook/useEffectOnce";
 
 const Game = () => {
     const {type,title} = useParams();
@@ -10,7 +11,7 @@ const Game = () => {
     const url = 'http://localhost:8080/game/' + type.toUpperCase() + '/'+ title;
     console.log('In Game', url)
 
-    useEffect( () => {
+    useEffectOnce( () => {
          fetchUrl(url).then(data => setGame(data));
     }, [])
 
