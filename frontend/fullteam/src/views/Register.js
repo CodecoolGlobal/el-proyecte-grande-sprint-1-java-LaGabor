@@ -1,31 +1,44 @@
 import React from 'react';
 import '../components/Register.css'
 import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import get from "../fetch/fetch";
+import fetchUrl from "../fetch/fetch";
 const Register = () => {
+    let wrongSign = false;
+    const history = useHistory();
     const BASE_URL = "https://jsonplaceholder.typicode.com/users";
     const [name, setName] = useState("");
     const [nameW, setNameW] = useState("");
-    const [email, setEmail] = useState("example@email.com");
+    const [email, setEmail] = useState("");
     const [emailW, setEmailW] = useState("");
     const [password, setPassword] = useState("");
     const [passwordW, setPasswordW] = useState("");
     const [confirmPwd, setConfirmPwd] = useState("");
     const [confirmPwdW, setConfirmPwdW] = useState("");
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [fullname, setFullname] = useState("d");
+    const [fName, setFName] = useState("");
+    const [lName, setLName] = useState("");
+    const [fullname, setFullname] = useState("");
     const [fullnameW, setFullnameW] = useState("");
     const [checkbox, setCheckbox] = useState(false);
     const [signup, setSignup] = useState("");
+    const [signupE, setSignupE] = useState("");
+    const [checkboxWarning,setCheckboxWarning] = useState("");
     const [date, setDate] = useState("");
+    const [dateW, setDateW] = useState("");
     useEffect(() => {
         confirmPwdChecking();
-        EmailChecking();
-        NameChecking();
-
+        emailChecking();
+        nameChecking();
         fullnameChecking();
-    }, [confirmPwd, email, name, lname, fname]);
-    const NameChecking = () => {
+    }, [confirmPwd, email, name, lName, fName,checkbox]);
+    const nameChecking = () => {
+        if(name.trim().length === 0){
+            if(wrongSign){
+                setNameW("Name cant be Null!");
+            }
+            return false;
+        }
         if (name === "Recoded" || name === "recoded") {
             setNameW("Username is taken ");
             return false;
@@ -34,18 +47,24 @@ const Register = () => {
             return true;
         }
     };
-    const EmailChecking = () => {
+    const emailChecking = () => {
         if (!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-            setEmailW("invalid Email");
-            return false;
+           if(email.trim()===''){
+               if(wrongSign){
+                   setEmailW("CantBeNull")}else{
+                   setEmailW("")
+               }
+               return false}
+            setEmailW("invalid Email")
+            return false
         } else {
             setEmailW("");
             return true;
         }
     };
-    const PassChecking = () => {
+    const PasswordLengthChecking = () => {
         if (password.length < 5) {
-            setPasswordW("pasword should be at least 6 characters ");
+            setPasswordW("password should be at least 6 characters ");
             return false;
         } else {
             setPasswordW("");
@@ -63,7 +82,11 @@ const Register = () => {
     };
 
     const fullnameChecking = () => {
-        setFullname(fname + lname);
+        setFullname(fName + lName);
+        if(fullname === ""){
+
+            return false;
+        }
         if (!fullname.match(/^[a-zA-Z ]+$/)) {
             setFullnameW("Name only accepts letters");
 
@@ -71,77 +94,116 @@ const Register = () => {
         } else {
             setFullnameW("");
             return true;
+
         }
     };
 
     const birthDateChecking = () => {
-        if (date){
+        if (Date.parse(date)<Date.now()){
+            setDateW("")
             return true;
         }
+        if(!date){
+           setDateW("Cant be Null!")
+            return  false;
+        }
+        setDateW("Are you from the future?")
         return false;
     };
 
-    function handleSubmit(e) {
-        NameChecking();
-        EmailChecking();
-        PassChecking();
-        confirmPwdChecking();
-        fullnameChecking();
-        birthDateChecking()
+    const checkboxChecking = () =>{
+        if(checkbox === true){
+            setCheckboxWarning("")
+            return true;
+        }else{
+            setCheckboxWarning("You need to sell Your Soul!")
+            return false
+        }
+    }
+
+    async function handleSubmit(e) {
+        let nameCheck = nameChecking();
+        let emailCheck = emailChecking();
+        let passwordLengthCheck = PasswordLengthChecking();
+        let passwordCheck = confirmPwdChecking();
+        let fullNameCheck = fullnameChecking();
+        let birthdateCheck = birthDateChecking()
+        let checkboxCheck = checkboxChecking()
         if (
-            fullnameChecking() === true &&
-            confirmPwdChecking() === true &&
-            PassChecking() === true &&
-            EmailChecking() === true &&
-            NameChecking() === true &&
-            birthDateChecking() === true &&
-            checkbox === true
+            fullNameCheck === true &&
+            passwordCheck === true &&
+            passwordCheck === true &&
+            emailCheck === true &&
+            nameCheck === true &&
+            birthdateCheck === true &&
+            checkboxCheck === true &&
+            await checkIfNameExist(name) === true &&
+            await checkIfEmailExist(email) === true
         ) {
-            fetchData();
+            fetchUserData();
         } else if (
-            fullnameChecking() === true &&
-            confirmPwdChecking() === true &&
-            PassChecking() === true &&
-            EmailChecking() === true &&
-            NameChecking() === true &&
-            checkbox === false
+            fullNameCheck === true &&
+            passwordCheck === true &&
+            passwordLengthCheck === true &&
+            emailCheck === true &&
+            nameCheck === true &&
+            checkboxCheck === false
         ) {
+            wrongSign = true;
+            nameChecking();
+            emailChecking()
             alert("please accept terms of service");
         } else {
+            wrongSign = true;
+            nameChecking();
+            emailChecking()
             alert("please fill in the from");
         }
     }
 
-    const fetchData = () => {
-        fetch(BASE_URL, {
-            method: "POST",
-            body: JSON.stringify({
-                name: fullname,
-                username: name,
-                email: email,
-                password: password
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then((res) => {
-                return res.json();
-            })
-            .then((json) => {
-                console.log(json);
+    const redirectToMainPage = () =>{
+        history.push('/')
+    }
+
+    async function fetchUserData(){
+        let body = {"username": name,
+                    "email": email,
+                    "birthDate": date,
+                    "password": password
+                    }
+        await fetchUrl.post("http://localhost:8080/authentication/create/profile",body)
                 setSignup("Successfully signed up");
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+                setSignupE("");
+                setTimeout(redirectToMainPage,1000);
+
     };
+
+    async function checkIfNameExist(name) {
+        let profileNameExistCheck = await fetchUrl.get(`http://localhost:8080/authentication/check/profile/${name}`);
+        if(!profileNameExistCheck){
+            return true;
+        }
+        setSignupE("Username already exist!");
+        setSignup("");
+        return false;
+    }
+
+    async function checkIfEmailExist(email) {
+        let emailExistCheck = await fetchUrl.get(`http://localhost:8080/authentication/check/email/${email}`);
+        if(!emailExistCheck){
+            return true;
+        }
+        setSignupE("Email already exist!");
+        setSignup("");
+        return false;
+    }
 
     return (
         <div className="main-container">
             <div className="form">
                 <div className="header">
                     <p className="success">{signup} </p>
+                    <p className="exist">{signupE}</p>
                     <h1>Registration form </h1>
                 </div>
 
@@ -173,10 +235,8 @@ const Register = () => {
 
                     <div className="inputs">
                         <input type="date" id="birthday" name="birthday" onChange={(event) => setDate(event.target.value)} />
+                        <p className="warnning">{dateW}</p>
                     </div>
-
-
-
 
                     <div className="inputs">
                         <input
@@ -185,7 +245,7 @@ const Register = () => {
                             placeholder="password"
                             onChange={(event) => {
                                 setPassword(event.target.value);
-                                PassChecking(event.target.value);
+                                PasswordLengthChecking(event.target.value);
                             }}
                         />
                         <i class="fa fa-unlock-alt icon"></i>
@@ -209,7 +269,7 @@ const Register = () => {
                                     id="fname"
                                     placeholder="First name"
                                     onChange={(event) => {
-                                        setFname(event.target.value);
+                                        setFName(event.target.value);
                                     }}
                                 />
                                 <input
@@ -217,7 +277,7 @@ const Register = () => {
                                     id="lname"
                                     placeholder="last name"
                                     onChange={(event) => {
-                                        setLname(event.target.value);
+                                        setLName(event.target.value);
                                     }}
                                 />
                             </div>
@@ -230,6 +290,7 @@ const Register = () => {
                                     onChange={() => setCheckbox(!checkbox)}
                                 />
                                 <label for="checkbox"> I agree to selling my soul.</label>
+                                <p className="warnning">{checkboxWarning}</p>
                             </div>
                             <br />
                         </div>
