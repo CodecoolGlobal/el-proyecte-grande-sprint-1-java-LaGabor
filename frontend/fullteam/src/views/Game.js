@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import get from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
+import {useEffectOnce} from "../hook/useEffectOnce";
 
 const Game = () => {
     const {type,title} = useParams();
@@ -12,8 +13,6 @@ const Game = () => {
 
     useEffect( () => {
          get(url).then(data => setGame(data));
-    }, [])
-
 
     return game && (
         <div className="game-container">
