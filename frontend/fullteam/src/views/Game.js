@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import fetchUrl from "../fetch/fetch";
+import get from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 
 const Game = () => {
@@ -11,7 +11,7 @@ const Game = () => {
     console.log('In Game', url)
 
     useEffect( () => {
-         fetchUrl(url).then(data => setGame(data));
+         get(url).then(data => setGame(data));
     }, [])
 
 

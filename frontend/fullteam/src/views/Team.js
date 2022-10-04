@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import fetchUrl from "../fetch/fetch";
-import TeamCard from "../components/teamCard";
+import get from "../fetch/fetch";
+import TeamCard from "../components/Card";
 const Team = () => {
     return(
         <div className="team-container">
