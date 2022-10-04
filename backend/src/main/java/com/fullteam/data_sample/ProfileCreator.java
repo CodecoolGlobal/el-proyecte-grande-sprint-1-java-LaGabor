@@ -41,6 +41,7 @@ public class ProfileCreator {
                         .ownedOnlineGames(Set.of(games.get(6),games.get(7)))
                         .roles(UserRole.USER)
                         .password(passwordEncoder.encode("kacsakacsa"))
+                        .email("ducktheball@quackmail.duck")
                         .build();
         profileService.addProfile(profile1);
 

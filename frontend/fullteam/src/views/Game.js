@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import fetchUrl from "../fetch/fetch";
+import get from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 import {useEffectOnce} from "../hook/useEffectOnce";
 
@@ -11,10 +11,8 @@ const Game = () => {
     const url = 'http://localhost:8080/game/' + type.toUpperCase() + '/'+ title;
     console.log('In Game', url)
 
-    useEffectOnce( () => {
-         fetchUrl(url).then(data => setGame(data));
-    }, [])
-
+    useEffect( () => {
+         get(url).then(data => setGame(data));
 
     return game && (
         <div className="game-container">

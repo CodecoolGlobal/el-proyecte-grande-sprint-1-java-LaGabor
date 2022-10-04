@@ -13,4 +13,5 @@ public class ProfileController {
         model.addAttribute("species", "Duck");
         return "profile";
     }
+
 }

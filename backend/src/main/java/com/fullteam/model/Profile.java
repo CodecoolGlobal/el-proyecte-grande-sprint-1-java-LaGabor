@@ -28,6 +28,9 @@ public class Profile {
     @JsonIgnore
     private String password;
 
+    @Column(unique = true)
+    private String email;
+
     @Column(updatable = false)
     private  String username;
 

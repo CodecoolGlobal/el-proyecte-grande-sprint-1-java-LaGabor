@@ -110,3 +110,8 @@
     color: #0acf0a;
     padding: 5px;
 }
+
+.exist {
+    color: red;
+    padding: 5px;
+}
