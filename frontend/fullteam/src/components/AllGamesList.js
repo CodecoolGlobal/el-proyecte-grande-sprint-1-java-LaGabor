@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import fetchUrl from "../fetch/fetch";
 import {Link} from "react-router-dom";
 import './Lister.css';
+import {useEffectOnce} from "../hook/useEffectOnce";
 
 const AllGamesList = () => {
     const [Games, setGames] = useState([]);
 
 
 
-    useEffect(() => {
+    useEffectOnce(() => {
         fetchUrl("http://localhost:8080/games").then(response => setGames(response))
     }, [])
 
