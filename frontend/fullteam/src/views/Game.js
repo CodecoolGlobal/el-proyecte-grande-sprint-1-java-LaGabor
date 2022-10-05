@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import get from "../fetch/fetch";
+import fetchUrl from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 import {useEffectOnce} from "../hook/useEffectOnce";
 
@@ -12,7 +12,7 @@ const Game = () => {
     console.log('In Game', url)
 
     useEffect( () => {
-         get(url).then(data => setGame(data));
+         fetchUrl.get(url).then(data => setGame(data));})
 
     return game && (
         <div className="game-container">
