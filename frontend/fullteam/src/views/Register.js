@@ -140,7 +140,7 @@ const Register = () => {
             await checkIfNameExist(name) === true &&
             await checkIfEmailExist(email) === true
         ) {
-            fetchUserData();
+            await fetchUserData();
         } else if (
             fullNameCheck === true &&
             passwordCheck === true &&

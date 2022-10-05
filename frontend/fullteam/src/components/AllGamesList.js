@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import get from "../fetch/fetch";
+import fetchUrl from "../fetch/fetch";
 import {Link} from "react-router-dom";
 import './Lister.css';
 
@@ -8,9 +8,10 @@ const AllGamesList = () => {
 
 
 
+
     useEffect(() => {
-        get("http://localhost:8080/games").then(response => setGames(response))
-    }, [])
+        fetchUrl.get("http://localhost:8080/games").then(response => setGames(response))
+    })
 
     const gameTypeBackground = gameType =>{
         if(gameType==="BOARD"){
