@@ -1,17 +1,8 @@
-import React, {useEffect, useState} from "react";
-import get from "../fetch/fetch";
+import React from "react";
 import {Link} from "react-router-dom";
 import './Lister.css';
-import {useEffectOnce} from "../hook/useEffectOnce";
 
-const AllGamesList = () => {
-    const [Games, setGames] = useState([]);
-
-
-
-
-    useEffect(() => {
-        get("http://localhost:8080/games").then(response => setGames(response))
+const AllGamesList = ({games}) => {
 
     const gameTypeBackground = gameType =>{
         if(gameType==="BOARD"){
@@ -35,7 +26,7 @@ const AllGamesList = () => {
     }
 
     const getGameList = () => {
-        return Games.map((game,index) =>
+        return games.map((game,index) =>
             <div  className="row " key={index}>
                     <div className="data">
                         <div className="img flex">
@@ -65,7 +56,7 @@ const AllGamesList = () => {
         )
     }
 
-    return Games &&(
+    return (
         <div className="list-container">
             <div className="list-content .flex-column">
                 {getGameList()}
