@@ -9,7 +9,7 @@ const AllGamesList = () => {
 
 
 
-    useEffect(() => {
+    useEffectOnce(() => {
         fetchUrl.get("http://localhost:8080/games").then(response => setGames(response))
     })
 
