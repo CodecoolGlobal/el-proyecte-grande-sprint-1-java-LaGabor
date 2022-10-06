@@ -14,6 +14,11 @@ const Teams = () => {
             .then(data => setTeams(data));
     })
 
+    const getRandomPic = () => {
+        const pics =["https://i.pinimg.com/236x/3e/17/1a/3e171aae4436f38ad9b02f98ff37cb98--funny-duck-flash-drive.jpg","http://www.dumpaday.com/wp-content/uploads/2016/09/funny-duck.jpg","https://i5.walmartimages.com/asr/ecdcbf1d-3c09-430d-a33e-aa2b5358d5d5.7dbf2b7c5957f63c53ac4b902447e703.jpeg"]
+        return pics[Math.floor(Math.random() * pics.length)]
+    }
+
     const gameTypeBackground = gameType =>{
         if(gameType==="BOARD"){
             return (
@@ -35,27 +40,27 @@ const Teams = () => {
             <div className="row " key={index}>
                 <div className="data">
                     <div className="img flex">
-                        <Link to={"/game/"+game.type.toLowerCase()+"/"+game.title} style={{ textDecoration: 'none' }}><img src={getRandomPic()} alt=""/></Link>
+                        <img src={getRandomPic()} alt=""/>
                     </div>
                     <div className="text">
-                        {gameTypeBackground(gameType)}
+                        {gameTypeBackground(team.game.type)}
                         <Link to={"/team/" + team.teamName}
                               style={{textDecoration: 'none'}}><p className="title">{team.teamName}</p></Link>
                         <div className="info">
                             <p>Required Team Members : {team.minWantedTeamSize} - {team.maxWantedTeamSize}</p>
-                            <p>Creation Date : {team.teamCreated}</p>
-                            <p>Description: {team.description}</p>
+                            <p>Admin : {team.admin.username}</p>
+                            <p>Team Created : {team.teamCreated}</p>
                         </div>
                     </div>
                 </div>
                 <div className="data">
                     <div className="city">
-                        <p>{team.admin.username}</p>
+                        <p> Free Space : {team.freePlaces}</p>
                         <hr/>
-                        {team.players.map(player => <p>{player.username}</p>)}
+                        <Link to={"/game/"+team.game.type.toLowerCase()+"/"+team.game.title } style={{ textDecoration: 'none' }}><p className="title">{team.game.title}</p></Link>
                     </div>
                     <div className="button">
-                        <button>Own</button>
+                        <button>Checkout</button>
                     </div>
                 </div>
             </div>
@@ -63,10 +68,11 @@ const Teams = () => {
     }
 
     return teams && (
-        <div className="team-container">
-            <h2>I am the Team List Page! </h2>
-            <div className="list-content .flex-column">
-                {putOutTeams()}
+        <div className="gameRegister-container">
+            <div className="list-container">
+                <div className="list-content .flex-column">
+                    {putOutTeams()}
+                </div>
             </div>
         </div>
     );
