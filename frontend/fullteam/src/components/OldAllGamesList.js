@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import get from "../fetch/fetch";
+import fetchUrl from "../fetch/fetch";
 import {Link} from "react-router-dom";
 
 const OldAllGamesList = () => {
     const [Games, setGames] = useState([]);
 
-    useEffect(   () => {
-        get("http://localhost:8080/game/all-games").then(data => setGames(data));
+    useEffect(() => {
+        fetchUrl.get("http://localhost:8080/game/all-games").then(data => setGames(data));
     }, [])
 
     const getTableRows = (type) => {

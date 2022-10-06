@@ -2,6 +2,7 @@ import React from 'react';
 import '../components/Login.css'
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
+import fetchUrl from "../fetch/fetch";
 
 
 const Login = () => {
@@ -13,11 +14,41 @@ const Login = () => {
     const [signup,setSignup] = useState("")
     const [signupE,setSignupE] = useState("")
 
-    const signIn = () => {
+    const emailNotNull = () => {
+        if(email.trim()===''){
+            setEmailW("Cant be Null!")
+            return false;
+        }
+        setEmailW("")
+        return true;
+    };
+
+    const passwordNotNull = () => {
+        if(password.trim()===""){
+            setPassW("Cant be Null!")
+            return false;
+        }
+        setPassW("")
+        return true;
+    };
+
+    const redirectToMainPage = () =>{
+        history.push('/')
+    }
+
+    async function fetchLoginUserData(){
+        let body = {"email": email,
+            "password": password
+        }
+        await fetchUrl.post("http://localhost:8080/authentication/login",body)
+    };
+
+    const signIn = async () => {
         let emailIsNotNull= emailNotNull();
         let passwordIsNotNull = passwordNotNull();
         if(emailIsNotNull && passwordIsNotNull){
-
+            let fetchValue = await fetchLoginUserData();
+            console.log(fetchValue);
         }
         //history.push('/')
     }
@@ -25,23 +56,6 @@ const Login = () => {
     const register = () => {
         history.push('Register')
     }
-
-    const emailNotNull = () => {
-        if(email.trim()===''){
-            setEmailW("Cant be Null!")
-            return false;
-        }
-        return true;
-    };
-
-    const passwordNotNull = () => {
-        if(email.trim()===''){
-            setPassW("Cant be Null!")
-            return false;
-        }
-        return true;
-    };
-
 
     return (
         <div className="login">
