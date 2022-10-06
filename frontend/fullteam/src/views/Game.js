@@ -4,6 +4,7 @@ import PageTitle from "../components/PageTitle";
 import get from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 import {useEffectOnce} from "../hook/useEffectOnce";
+import fetchUrl from "../fetch/fetch";
 
 const Game = () => {
     const {type,title} = useParams();
@@ -11,8 +12,8 @@ const Game = () => {
     const url = 'http://localhost:8080/game/' + type.toUpperCase() + '/'+ title;
     console.log('In Game', url)
 
-    useEffect( () => {
-         get(url).then(data => setGame(data));
+    useEffectOnce( () => {
+         fetchUrl.get(url).then(data => setGame(data))})
 
     return game && (
         <div className="game-container">
