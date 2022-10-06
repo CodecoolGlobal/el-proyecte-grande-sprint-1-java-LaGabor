@@ -1,15 +1,9 @@
 
-import React, {useState} from "react";
-import fetchUrl from "../fetch/fetch";
+import React from "react";
 import {Link} from "react-router-dom";
 import './Lister.css';
 
 const AllGamesList = ({games}) => {
-    const [Games, setGames] = useState([]);
-
-    useEffectOnce(() => {
-        fetchUrl.get("http://localhost:8080/games").then(response => setGames(response))
-    })
 
     const gameTypeBackground = gameType =>{
         if(gameType==="BOARD"){
