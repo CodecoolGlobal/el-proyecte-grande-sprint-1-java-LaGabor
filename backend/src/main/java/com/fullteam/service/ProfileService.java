@@ -7,6 +7,8 @@ import com.fullteam.repository.ProfileRepository;
 import com.fullteam.security.UserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +41,10 @@ public class ProfileService implements UserDetailsService {
 
     public Optional<Profile> getProfile(Long id) {
         return profileRepository.findById(id);
+    }
+
+    public Optional<Profile> getProfileByEmail(String email) {
+        return profileRepository.findByEmail(email);
     }
 
     public List<Profile> getProfiles(){
@@ -97,7 +103,14 @@ public class ProfileService implements UserDetailsService {
         return new User(profile.getUsername(), profile.getPassword(), authorizes);
     }
 
-    public void profileLogin(LoginDto loginDto) {
-
+    public ResponseEntity<String> profileLogin(LoginDto loginDto) {
+        Optional<Profile> profileOptional = getProfileByEmail(loginDto.getEmail());
+        if(profileOptional.isPresent()){
+            if(passwordEncoder.matches(loginDto.getPassword(),profileOptional.get().getPassword())){
+                return new ResponseEntity<>("Successful Login!", HttpStatus.OK);
+            }
+            return new ResponseEntity<>("Email or  password error!", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>("Email not found",HttpStatus.NOT_FOUND);
     }
 }

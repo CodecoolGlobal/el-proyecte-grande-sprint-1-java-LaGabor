@@ -41,7 +41,6 @@ public class AuthenticationController {
 
     @PostMapping("authentication/login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        profileService.profileLogin(loginDto);
-        return new ResponseEntity<>("Profile successfully saved", HttpStatus.OK);
+        return profileService.profileLogin(loginDto);
     }
 }
