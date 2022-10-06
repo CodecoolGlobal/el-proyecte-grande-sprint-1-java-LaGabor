@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import './Lister.css';
 
 const AllGamesList = ({games}) => {
-const AllGamesList = () => {
     const [Games, setGames] = useState([]);
 
     useEffectOnce(() => {
