@@ -1,6 +1,6 @@
 import React from 'react';
 import '../components/Login.css'
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import fetchUrl from "../fetch/fetch";
 

@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
 import PageTitle from "../components/PageTitle";
-import get from "../fetch/fetch";
+import fetchUrl from "../fetch/fetch";
 import GameDescription from "../components/gameDescription";
 import {useEffectOnce} from "../hook/useEffectOnce";
-import fetchUrl from "../fetch/fetch";
 
 const Game = () => {
     const {type,title} = useParams();
