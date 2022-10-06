@@ -1,6 +1,7 @@
 package com.fullteam.service;
 
 import com.fullteam.model.Team;
+import com.fullteam.model.types.GameType;
 import com.fullteam.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class TeamService {
 
     public Optional<Team> findTeamById(Long id) {
         return teamRepository.findById(id);
+    }
+
+    public List<Team> findTeamsByGameTpe(GameType gameType) {
+        return teamRepository.findTeamsByGameType(gameType);
     }
 }

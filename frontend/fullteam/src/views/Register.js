@@ -2,7 +2,6 @@ import React from 'react';
 import '../components/Register.css'
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import get from "../fetch/fetch";
 import fetchUrl from "../fetch/fetch";
 const Register = () => {
     let wrongSign = false;

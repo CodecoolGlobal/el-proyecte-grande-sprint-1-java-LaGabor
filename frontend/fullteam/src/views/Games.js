@@ -1,13 +1,19 @@
-import React from 'react';
-import OldAllGamesList from '../components/OldAllGamesList.js'
-import PageTitle from "../components/PageTitle";
+import React, {useState} from 'react';
 import AllGamesList from "../components/AllGamesList";
 import '../components/Lister.css';
+import {useEffectOnce} from "../hook/useEffectOnce";
+import fetchUrl from "../fetch/fetch";
 const Games = () => {
+    const [games, setGames] = useState([]);
 
-    return(
+    useEffectOnce(() => {
+        fetchUrl.get("http://localhost:8080/games")
+            .then(data => setGames(data))
+    })
+
+    return games && (
         <div className="gameRegister-container">
-            <AllGamesList/>
+            <AllGamesList games={games}/>
         </div>
     );
 }
