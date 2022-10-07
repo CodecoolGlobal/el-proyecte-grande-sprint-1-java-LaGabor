@@ -2,6 +2,7 @@ package com.fullteam.service;
 
 import com.fullteam.controller.dto.LoginDto;
 import com.fullteam.controller.dto.RegistrationProfileDto;
+import com.fullteam.model.Game;
 import com.fullteam.model.Profile;
 import com.fullteam.repository.ProfileRepository;
 import com.fullteam.security.UserRole;
@@ -25,7 +26,11 @@ public class ProfileService implements UserDetailsService {
     private final ProfileRepository profileRepository;
     private PasswordEncoder passwordEncoder;
 
-
+    public void addAllProfile(List<Profile> profiles){
+        for(Profile profile: profiles){
+            profileRepository.save(profile);
+        }
+    }
 
     @Autowired
     public ProfileService(ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {

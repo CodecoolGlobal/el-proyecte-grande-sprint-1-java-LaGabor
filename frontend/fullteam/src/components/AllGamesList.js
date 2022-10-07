@@ -61,7 +61,7 @@ const AllGamesList = ({games}) => {
         <div className="list-container">
             <div className="list-content .flex-column">
                 {getGameList()}
-            </div>
+                </div>
         </div>
     )
 

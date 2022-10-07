@@ -97,6 +97,14 @@
     color:black;
 }
 
+.city p:last-child.title:hover{
+    color: powderblue;
+}
+
+.city p:last-child.title:active{
+    color: purple;
+}
+
 .title:hover{
     color:blue;
 }

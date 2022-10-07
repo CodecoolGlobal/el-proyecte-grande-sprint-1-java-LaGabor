@@ -7,19 +7,19 @@ import fetchUrl from "../fetch/fetch";
 
 const Login = () => {
     const history = useHistory();
-    const [email, setEmail] = useState("");
+    const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [passW, setPassW] = useState("");
-    const [emailW, setEmailW] = useState("");
+    const [userNameW, setUserNameW] = useState("");
     const [signup,setSignup] = useState("")
     const [signupE,setSignupE] = useState("")
 
-    const emailNotNull = () => {
-        if(email.trim()===''){
-            setEmailW("Cant be Null!")
+    const userNotNull = () => {
+        if(user.trim()===''){
+            setUserNameW("Cant be Null!")
             return false;
         }
-        setEmailW("")
+        setUserNameW("")
         return true;
     };
 
@@ -37,16 +37,16 @@ const Login = () => {
     }
 
     async function fetchLoginUserData(){
-        let body = {"email": email,
+        let body = {"username": user,
             "password": password
         }
-        await fetchUrl.post("http://localhost:8080/authentication/login",body)
+        await fetchUrl.post("http://localhost:8080/login",body)
     };
 
     const signIn = async () => {
-        let emailIsNotNull= emailNotNull();
+        let userNameIsNotNull= userNotNull();
         let passwordIsNotNull = passwordNotNull();
-        if(emailIsNotNull && passwordIsNotNull){
+        if(userNameIsNotNull && passwordIsNotNull){
             let fetchValue = await fetchLoginUserData();
             console.log(fetchValue);
         }
@@ -63,16 +63,15 @@ const Login = () => {
                 <div className="header">
                     <p className="success">{signup} </p>
                     <p className="notExist">{signupE}</p>
-                    <h1>Registration form </h1>
                 </div>
                 <h1>Sign-in</h1>
-                    <h5>E-mail</h5>
+                    <h5>Username</h5>
                     <input
                         type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
                     />
-                    <p className="warnning">{emailW}</p>
+                    <p className="warnning">{userNameW}</p>
 
                     <h5>Password</h5>
                     <input
